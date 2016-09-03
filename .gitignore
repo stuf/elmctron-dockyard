@@ -1,0 +1,7 @@
+.vscode/
+elm-stuff/
+node_modules/
+dist/
+app/
+!app/package.json
+

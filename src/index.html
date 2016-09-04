@@ -16,10 +16,12 @@
 </body>
 
 <script type="text/javascript">
-var storedState = localStorage.getItem('elmctron');
-var startingState = storedState ? JSON.parse(storedState) : null;
-var elmctron = Elm.Todo.fullscreen(startingState);
-elmctron.ports.focus.subscribe(function(selector) {
+const storedState = localStorage.getItem('dockyard');
+const startingState = storedState ? JSON.parse(storedState) : null;
+const app = Elm.Dockyard.fullscreen(startingState);
+const ports = app.ports;
+
+ports.focus.subscribe(function(selector) {
   setTimeout(function() {
     var nodes = document.querySelectorAll(selector);
     if (nodes.length === 1 && document.activeElement !== nodes[0]) {
@@ -27,9 +29,17 @@ elmctron.ports.focus.subscribe(function(selector) {
     }
   }, 50);
 });
-elmctron.ports.setStorage.subscribe(function(state) {
-    localStorage.setItem('elmctron', JSON.stringify(state));
+
+ports.setStorage.subscribe(function(state) {
+  console.log('setStorage', state);
+  localStorage.setItem('elmctron', JSON.stringify(state));
 });
+
+ports.startGame.subscribe(function (gameState) {
+  console.log('startGame:gameState =>', gameState);
+  ports.testEvent.send('Lel kek tops');
+});
+
 </script>
 
 </html>

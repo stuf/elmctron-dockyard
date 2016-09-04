@@ -1,4 +1,4 @@
-port module Todo exposing (..)
+port module Dockyard exposing (..)
 
 {-| Dockyard Elm implementation
 
@@ -11,11 +11,6 @@ import Html exposing (..)
 import Html.App as App
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Html.Lazy exposing (lazy, lazy2, lazy3)
-import Json.Decode as Json
-import Json.Encode exposing (string)
-import String
-import Dockyard exposing (view)
 import Electron.WebView as WebView
 
 
@@ -24,8 +19,8 @@ main =
     App.programWithFlags
         { init = init
         , view = view
-        , update = (\msg model -> withSetStorage (update msg model))
-        , subscriptions = \_ -> Sub.none
+        , update = (\msg model -> withSetStorage <| update msg model)
+        , subscriptions = subscriptions
         }
 
 
@@ -33,6 +28,9 @@ port setStorage : Model -> Cmd msg
 
 
 port focus : String -> Cmd msg
+
+
+port startGame : GameState -> Cmd msg
 
 
 {-| We want to `setStorage` on every update. This function adds the setStorage
@@ -50,36 +48,40 @@ withSetStorage ( model, cmds ) =
 --| Model: The full application state of our app.
 
 type alias Model =
-    { tasks : List String
-    , field : String
-    , uid : Int
-    , visibility : String
+    { gameState : GameState
+    , test : Maybe String
+    }
+
+
+type alias GameState =
+    { debuggerIsAttached : Bool
+    , firstLoad : Bool
+    , gameViewId : Maybe String
+    }
+
+
+type alias NetworkEvent =
+    { path : String
+    , error : Maybe String
+    , headers : Maybe String
+    , body : Maybe String
+    , postBody : Maybe String
     }
 
 
 emptyModel : Model
 emptyModel =
-    { tasks = []
-    , visibility = "All"
-    , field = ""
-    , uid = 0
+    { gameState = { firstLoad = True
+                  , debuggerIsAttached = False
+                  , gameViewId = Nothing
+                  }
+    , test = Nothing
     }
-
-
-{-
-newTask : String -> Int -> Task
-newTask desc id =
-    { description = desc
-    , completed = False
-    , editing = False
-    , id = id
-    }
--}
 
 
 init : Maybe Model -> ( Model, Cmd Msg )
 init savedModel =
-    Maybe.withDefault emptyModel savedModel ! []
+    Maybe.withDefault emptyModel savedModel ! [ startGame emptyModel.gameState ]
 
 
 
@@ -90,6 +92,8 @@ init savedModel =
 type Msg
     = NoOp
     | Initialize
+    | Test String
+    | HandleNetworkEvent NetworkEvent
 
 
 -- State management
@@ -100,11 +104,37 @@ update msg model =
         Initialize ->
             model ! []
 
+        Test x ->
+            { model
+                | test = Just x
+                } ! []
+
+        HandleNetworkEvent event ->
+            model ! []
+
         _ ->
             model ! []
 
 
--- VIEW
+{-| SUBSCRIPTIONS
+-}
+
+subscriptions : Model -> Sub Msg
+subscriptions _ =
+    Sub.batch
+        [ handleEvent HandleNetworkEvent
+        , testEvent Test
+        ]
+
+
+port handleEvent : (NetworkEvent -> msg) -> Sub msg
+
+
+port testEvent : (String -> msg) -> Sub msg
+
+
+{-| VIEW
+-}
 
 view : Model -> Html Msg
 view model =
@@ -112,14 +142,15 @@ view model =
         [ class "dockyard-wrapper"
         , style [ ( "visibility", "hidden" ) ]
         ]
-        [ section
+        [ p [] [ text (toString model.test) ]
+        , section
             []
             [ WebView.webview
-                [ src "http://www.google.com"
-                , attribute "nodeintegration" (toString True)
-                , attribute "plugins" (toString True)
-                , attribute "partition" (toString "persist:dockyard-elm")
-                , attribute "persist" (toString "kek")
+                [ id "gameview"
+                , src gameUrl
+                , attribute "nodeintegration" "nodeintegration"
+                , attribute "plugins" "plugins"
+                , attribute "partition" "persist:dockyard-elm"
                 ]
                 []
             ]
@@ -129,10 +160,17 @@ view model =
 
 infoFooter : Html msg
 infoFooter =
-    footer [ id "info" ]
+    footer
+        [ id "info" ]
         [ p []
             [ a [ href "https://github.com/rensouhou" ]
                 [ text "Rensouhou" ]
             , text " 2016"
             ]
         ]
+
+
+gameUrl : String
+gameUrl =
+    "http://www.google.com"
+    -- "http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/"

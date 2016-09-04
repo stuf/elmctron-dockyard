@@ -1,3 +1,8 @@
-module Dockyard.Data exposing (..)
+module Dockyard.Data exposing (dummy)
 
+{-| Data
+-}
 
+dummy : Int
+dummy =
+    420

@@ -1,4 +1,4 @@
-module Dockyard exposing (..)
+module Dockyard exposing (main)
 
 {-| Dockyard Elm implementation
 

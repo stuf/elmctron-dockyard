@@ -36,7 +36,7 @@ gulp.task('sass', () =>
  * Compile Elm files to JavaScript.
  */
 gulp.task('elm', ['elm-init', 'copy-assets'], () =>
-  gulp.src('src/*.elm')
+  gulp.src('src/**/*.elm')
       .pipe(elm.make({ filetype: 'js' }))
       .pipe(gulp.dest('app/'))
       .pipe(browserSync.reload({stream:true})));
@@ -46,8 +46,8 @@ gulp.task('elm', ['elm-init', 'copy-assets'], () =>
  * Watch Elm files, recompile them and reload BrowserSync.
  */
 gulp.task('watch', () => {
-    gulp.watch(['src/*.scss', 'src/*.html'], ['copy-assets']);
-    gulp.watch('src/*.elm', ['elm']);
+    gulp.watch(['src/**/*.scss', 'src/*.html'], ['copy-assets']);
+    gulp.watch('src/**/*.elm', ['elm']);
 });
 
 /**

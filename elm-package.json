@@ -4,7 +4,6 @@
     "repository": "https://github.com/stuf/elmctron-dockyard.git",
     "license": "MIT",
     "source-directories": [
-      "src/Electron/Html",
       "src/Electron",
       "src/Dockyard",
       "src"

@@ -4,6 +4,7 @@ module Types exposing
     , NetworkEvent
 
     , emptyModel
+    , emptyAppState
     )
 
 {-| MODEL
@@ -18,11 +19,25 @@ type alias Model =
     }
 
 
+{-| Application state
+-}
+
 type alias AppState =
     { debuggerIsAttached : Bool
     , firstLoad : Bool
     , gameViewId : Maybe String
     }
+
+
+-- Application state default
+
+emptyAppState : AppState
+emptyAppState =
+    { debuggerIsAttached = False
+    , firstLoad = True
+    , gameViewId = Nothing
+    }
+
 
 
 {-| Network event type

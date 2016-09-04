@@ -7,12 +7,8 @@ Implementation in the Elm Architecture.
 Check out <http://guide.elm-lang.org/architecture/index.html> for more info.
 -}
 
-import Html exposing (..)
 import Html.App as App
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import Electron.WebView as WebView
-import Types exposing (..)
+import Types exposing (Model)
 import State exposing (init, subscriptions, update, withSetStorage)
 import View exposing (view)
 

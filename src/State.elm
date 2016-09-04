@@ -1,12 +1,19 @@
-module State exposing (init, update, withSetStorage, subscriptions)
+module State exposing
+    ( init
+    , update
+    , subscriptions
+    
+    , withSetStorage
+    )
 
-import Types exposing (Model, NetworkEvent)
-import Ports exposing (handleEvent, testEvent, setStorage)
+import Types exposing (Model, NetworkEvent, emptyAppState, emptyModel)
+import Ports exposing (handleEvent, testEvent, setStorage, startApp)
 
 
 init : Maybe Model -> ( Model, Cmd Msg )
 init savedModel =
-    Maybe.withDefault Types.emptyModel savedModel ! []
+    Maybe.withDefault Types.emptyModel savedModel 
+        ! [ startApp { emptyAppState | gameViewId = Just "game-view" } ]
 
 
 {-| UPDATE
@@ -25,7 +32,7 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Initialize id ->
-            model ! [  ]
+            model ! [ startApp { emptyAppState | gameViewId = Just "game-view" } ]
 
         Test x ->
             { model
@@ -45,6 +52,7 @@ command for every step of the update function.
 withSetStorage : ( Model, Cmd Msg ) -> ( Model, Cmd Msg )
 withSetStorage ( model, cmds ) =
     ( model, Cmd.batch [ setStorage model, cmds ] )
+
 
 
 {-| SUBSCRIPTIONS

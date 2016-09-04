@@ -35,8 +35,8 @@ ports.setStorage.subscribe(function(state) {
   localStorage.setItem('elmctron', JSON.stringify(state));
 });
 
-ports.startApp.subscribe(function (gameState) {
-  console.log('startGame:gameState =>', gameState);
+ports.startApp.subscribe((state) => {
+  const gameViewId = state.gameViewId;
   ports.testEvent.send('Lel kek tops');
 });
 

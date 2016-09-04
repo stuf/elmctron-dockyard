@@ -7768,127 +7768,38 @@ var _elm_lang$html$Html_Attributes$classList = function (list) {
 				A2(_elm_lang$core$List$filter, _elm_lang$core$Basics$snd, list))));
 };
 var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$style;
-var _elm_lang$html$Html_Events$keyCode = A2(_elm_lang$core$Json_Decode_ops[':='], 'keyCode', _elm_lang$core$Json_Decode$int);
-var _elm_lang$html$Html_Events$targetChecked = A2(
-	_elm_lang$core$Json_Decode$at,
-	_elm_lang$core$Native_List.fromArray(
-		['target', 'checked']),
-	_elm_lang$core$Json_Decode$bool);
-var _elm_lang$html$Html_Events$targetValue = A2(
-	_elm_lang$core$Json_Decode$at,
-	_elm_lang$core$Native_List.fromArray(
-		['target', 'value']),
-	_elm_lang$core$Json_Decode$string);
-var _elm_lang$html$Html_Events$defaultOptions = _elm_lang$virtual_dom$VirtualDom$defaultOptions;
-var _elm_lang$html$Html_Events$onWithOptions = _elm_lang$virtual_dom$VirtualDom$onWithOptions;
-var _elm_lang$html$Html_Events$on = _elm_lang$virtual_dom$VirtualDom$on;
-var _elm_lang$html$Html_Events$onFocus = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'focus',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onBlur = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'blur',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onSubmitOptions = _elm_lang$core$Native_Utils.update(
-	_elm_lang$html$Html_Events$defaultOptions,
-	{preventDefault: true});
-var _elm_lang$html$Html_Events$onSubmit = function (msg) {
-	return A3(
-		_elm_lang$html$Html_Events$onWithOptions,
-		'submit',
-		_elm_lang$html$Html_Events$onSubmitOptions,
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onCheck = function (tagger) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'change',
-		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetChecked));
-};
-var _elm_lang$html$Html_Events$onInput = function (tagger) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'input',
-		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetValue));
-};
-var _elm_lang$html$Html_Events$onMouseOut = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'mouseout',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onMouseOver = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'mouseover',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onMouseLeave = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'mouseleave',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onMouseEnter = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'mouseenter',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onMouseUp = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'mouseup',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onMouseDown = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'mousedown',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onDoubleClick = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'dblclick',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onClick = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'click',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$Options = F2(
-	function (a, b) {
-		return {stopPropagation: a, preventDefault: b};
-	});
-var _stuf$elmctron_dockyard$Electron_WebView$nodeintegration = function (enabled) {
-	return A2(_elm_lang$html$Html_Attributes$attribute, 'nodeintegration', enabled);
-};
-var _stuf$elmctron_dockyard$Electron_WebView$webview = _elm_lang$html$Html$node('webview');
-var _stuf$elmctron_dockyard$Types$emptyModel = {
+var _stuf$elmctron_dockyard$App_Types$emptyModel = {
 	app: {firstLoad: true, debuggerIsAttached: false, gameViewId: _elm_lang$core$Maybe$Nothing},
 	test: _elm_lang$core$Maybe$Nothing
 };
-var _stuf$elmctron_dockyard$Types$Model = F2(
+var _stuf$elmctron_dockyard$App_Types$emptyAppState = {debuggerIsAttached: false, firstLoad: true, gameViewId: _elm_lang$core$Maybe$Nothing};
+var _stuf$elmctron_dockyard$App_Types$Model = F2(
 	function (a, b) {
 		return {app: a, test: b};
 	});
-var _stuf$elmctron_dockyard$Types$AppState = F3(
+var _stuf$elmctron_dockyard$App_Types$AppState = F3(
 	function (a, b, c) {
 		return {debuggerIsAttached: a, firstLoad: b, gameViewId: c};
 	});
-var _stuf$elmctron_dockyard$Types$NetworkEvent = F4(
+var _stuf$elmctron_dockyard$App_Types$NetworkEvent = F4(
 	function (a, b, c, d) {
 		return {path: a, headers: b, body: c, postBody: d};
 	});
-var _stuf$elmctron_dockyard$Ports$setStorage = _elm_lang$core$Native_Platform.outgoingPort(
+var _stuf$elmctron_dockyard$App_Ports$startApp = _elm_lang$core$Native_Platform.outgoingPort(
+	'startApp',
+	function (v) {
+		return {
+			debuggerIsAttached: v.debuggerIsAttached,
+			firstLoad: v.firstLoad,
+			gameViewId: (v.gameViewId.ctor === 'Nothing') ? null : v.gameViewId._0
+		};
+	});
+var _stuf$elmctron_dockyard$App_Ports$setGameView = _elm_lang$core$Native_Platform.outgoingPort(
+	'setGameView',
+	function (v) {
+		return v;
+	});
+var _stuf$elmctron_dockyard$App_Ports$setStorage = _elm_lang$core$Native_Platform.outgoingPort(
 	'setStorage',
 	function (v) {
 		return {
@@ -7900,26 +7811,12 @@ var _stuf$elmctron_dockyard$Ports$setStorage = _elm_lang$core$Native_Platform.ou
 			test: (v.test.ctor === 'Nothing') ? null : v.test._0
 		};
 	});
-var _stuf$elmctron_dockyard$Ports$focus = _elm_lang$core$Native_Platform.outgoingPort(
+var _stuf$elmctron_dockyard$App_Ports$focus = _elm_lang$core$Native_Platform.outgoingPort(
 	'focus',
 	function (v) {
 		return v;
 	});
-var _stuf$elmctron_dockyard$Ports$startApp = _elm_lang$core$Native_Platform.outgoingPort(
-	'startApp',
-	function (v) {
-		return {
-			debuggerIsAttached: v.debuggerIsAttached,
-			firstLoad: v.firstLoad,
-			gameViewId: (v.gameViewId.ctor === 'Nothing') ? null : v.gameViewId._0
-		};
-	});
-var _stuf$elmctron_dockyard$Ports$setGameView = _elm_lang$core$Native_Platform.outgoingPort(
-	'setGameView',
-	function (v) {
-		return v;
-	});
-var _stuf$elmctron_dockyard$Ports$handleEvent = _elm_lang$core$Native_Platform.incomingPort(
+var _stuf$elmctron_dockyard$App_Ports$handleEvent = _elm_lang$core$Native_Platform.incomingPort(
 	'handleEvent',
 	A2(
 		_elm_lang$core$Json_Decode$andThen,
@@ -7978,8 +7875,8 @@ var _stuf$elmctron_dockyard$Ports$handleEvent = _elm_lang$core$Native_Platform.i
 						});
 				});
 		}));
-var _stuf$elmctron_dockyard$Ports$testEvent = _elm_lang$core$Native_Platform.incomingPort('testEvent', _elm_lang$core$Json_Decode$string);
-var _stuf$elmctron_dockyard$State$withSetStorage = function (_p0) {
+var _stuf$elmctron_dockyard$App_Ports$testEvent = _elm_lang$core$Native_Platform.incomingPort('testEvent', _elm_lang$core$Json_Decode$string);
+var _stuf$elmctron_dockyard$App_State$withSetStorage = function (_p0) {
 	var _p1 = _p0;
 	var _p2 = _p1._0;
 	return {
@@ -7988,12 +7885,12 @@ var _stuf$elmctron_dockyard$State$withSetStorage = function (_p0) {
 		_1: _elm_lang$core$Platform_Cmd$batch(
 			_elm_lang$core$Native_List.fromArray(
 				[
-					_stuf$elmctron_dockyard$Ports$setStorage(_p2),
+					_stuf$elmctron_dockyard$App_Ports$setStorage(_p2),
 					_p1._1
 				]))
 	};
 };
-var _stuf$elmctron_dockyard$State$update = F2(
+var _stuf$elmctron_dockyard$App_State$update = F2(
 	function (msg, model) {
 		var _p3 = msg;
 		switch (_p3.ctor) {
@@ -8002,7 +7899,14 @@ var _stuf$elmctron_dockyard$State$update = F2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					model,
 					_elm_lang$core$Native_List.fromArray(
-						[]));
+						[
+							_stuf$elmctron_dockyard$App_Ports$startApp(
+							_elm_lang$core$Native_Utils.update(
+								_stuf$elmctron_dockyard$App_Types$emptyAppState,
+								{
+									gameViewId: _elm_lang$core$Maybe$Just('game-view')
+								}))
+						]));
 			case 'Test':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -8027,33 +7931,44 @@ var _stuf$elmctron_dockyard$State$update = F2(
 						[]));
 		}
 	});
-var _stuf$elmctron_dockyard$State$init = function (savedModel) {
+var _stuf$elmctron_dockyard$App_State$init = function (savedModel) {
 	return A2(
 		_elm_lang$core$Platform_Cmd_ops['!'],
-		A2(_elm_lang$core$Maybe$withDefault, _stuf$elmctron_dockyard$Types$emptyModel, savedModel),
+		A2(_elm_lang$core$Maybe$withDefault, _stuf$elmctron_dockyard$App_Types$emptyModel, savedModel),
 		_elm_lang$core$Native_List.fromArray(
-			[]));
+			[
+				_stuf$elmctron_dockyard$App_Ports$startApp(
+				_elm_lang$core$Native_Utils.update(
+					_stuf$elmctron_dockyard$App_Types$emptyAppState,
+					{
+						gameViewId: _elm_lang$core$Maybe$Just('game-view')
+					}))
+			]));
 };
-var _stuf$elmctron_dockyard$State$HandleNetworkEvent = function (a) {
+var _stuf$elmctron_dockyard$App_State$HandleNetworkEvent = function (a) {
 	return {ctor: 'HandleNetworkEvent', _0: a};
 };
-var _stuf$elmctron_dockyard$State$Test = function (a) {
+var _stuf$elmctron_dockyard$App_State$Test = function (a) {
 	return {ctor: 'Test', _0: a};
 };
-var _stuf$elmctron_dockyard$State$subscriptions = function (_p4) {
+var _stuf$elmctron_dockyard$App_State$subscriptions = function (_p4) {
 	return _elm_lang$core$Platform_Sub$batch(
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_stuf$elmctron_dockyard$Ports$handleEvent(_stuf$elmctron_dockyard$State$HandleNetworkEvent),
-				_stuf$elmctron_dockyard$Ports$testEvent(_stuf$elmctron_dockyard$State$Test)
+				_stuf$elmctron_dockyard$App_Ports$handleEvent(_stuf$elmctron_dockyard$App_State$HandleNetworkEvent),
+				_stuf$elmctron_dockyard$App_Ports$testEvent(_stuf$elmctron_dockyard$App_State$Test)
 			]));
 };
-var _stuf$elmctron_dockyard$State$Initialize = function (a) {
+var _stuf$elmctron_dockyard$App_State$Initialize = function (a) {
 	return {ctor: 'Initialize', _0: a};
 };
-var _stuf$elmctron_dockyard$State$NoOp = {ctor: 'NoOp'};
-var _stuf$elmctron_dockyard$Dockyard$gameUrl = 'http://www.google.com';
-var _stuf$elmctron_dockyard$Dockyard$infoFooter = A2(
+var _stuf$elmctron_dockyard$App_State$NoOp = {ctor: 'NoOp'};
+var _stuf$elmctron_dockyard$Electron_WebView$nodeintegration = function (enabled) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'nodeintegration', enabled);
+};
+var _stuf$elmctron_dockyard$Electron_WebView$webview = _elm_lang$html$Html$node('webview');
+var _stuf$elmctron_dockyard$App_View$gameUrl = 'http://www.google.com';
+var _stuf$elmctron_dockyard$App_View$infoFooter = A2(
 	_elm_lang$html$Html$footer,
 	_elm_lang$core$Native_List.fromArray(
 		[
@@ -8080,7 +7995,7 @@ var _stuf$elmctron_dockyard$Dockyard$infoFooter = A2(
 					_elm_lang$html$Html$text(' 2016')
 				]))
 		]));
-var _stuf$elmctron_dockyard$Dockyard$view = function (model) {
+var _stuf$elmctron_dockyard$App_View$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
@@ -8114,7 +8029,7 @@ var _stuf$elmctron_dockyard$Dockyard$view = function (model) {
 						_elm_lang$core$Native_List.fromArray(
 							[
 								_elm_lang$html$Html_Attributes$id('game-view'),
-								_elm_lang$html$Html_Attributes$src(_stuf$elmctron_dockyard$Dockyard$gameUrl),
+								_elm_lang$html$Html_Attributes$src(_stuf$elmctron_dockyard$App_View$gameUrl),
 								A2(_elm_lang$html$Html_Attributes$attribute, 'nodeintegration', 'nodeintegration'),
 								A2(_elm_lang$html$Html_Attributes$attribute, 'plugins', 'plugins'),
 								A2(_elm_lang$html$Html_Attributes$attribute, 'partition', 'persist:dockyard-elm')
@@ -8122,20 +8037,20 @@ var _stuf$elmctron_dockyard$Dockyard$view = function (model) {
 						_elm_lang$core$Native_List.fromArray(
 							[]))
 					])),
-				_stuf$elmctron_dockyard$Dockyard$infoFooter
+				_stuf$elmctron_dockyard$App_View$infoFooter
 			]));
 };
 var _stuf$elmctron_dockyard$Dockyard$main = {
 	main: _elm_lang$html$Html_App$programWithFlags(
 		{
-			init: _stuf$elmctron_dockyard$State$init,
-			view: _stuf$elmctron_dockyard$Dockyard$view,
+			init: _stuf$elmctron_dockyard$App_State$init,
+			view: _stuf$elmctron_dockyard$App_View$view,
 			update: F2(
 				function (msg, model) {
-					return _stuf$elmctron_dockyard$State$withSetStorage(
-						A2(_stuf$elmctron_dockyard$State$update, msg, model));
+					return _stuf$elmctron_dockyard$App_State$withSetStorage(
+						A2(_stuf$elmctron_dockyard$App_State$update, msg, model));
 				}),
-			subscriptions: _stuf$elmctron_dockyard$State$subscriptions
+			subscriptions: _stuf$elmctron_dockyard$App_State$subscriptions
 		}),
 	flags: _elm_lang$core$Json_Decode$oneOf(
 		_elm_lang$core$Native_List.fromArray(

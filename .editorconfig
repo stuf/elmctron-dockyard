@@ -5,3 +5,6 @@ indent_style = space
 [*.{html,css,scss}]
 indent_size = 2
 indent_style = space
+
+[*.elm]
+indent_size = 4

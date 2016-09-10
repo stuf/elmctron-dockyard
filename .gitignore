@@ -4,4 +4,4 @@ node_modules/
 dist/
 app/
 !app/package.json
-
+lib/

@@ -19,27 +19,8 @@
 const storedState = localStorage.getItem('dockyard');
 const startingState = storedState ? JSON.parse(storedState) : null;
 const app = Elm.Dockyard.fullscreen(startingState);
-const ports = app.ports;
-
-ports.focus.subscribe(function(selector) {
-  setTimeout(function() {
-    var nodes = document.querySelectorAll(selector);
-    if (nodes.length === 1 && document.activeElement !== nodes[0]) {
-      nodes[0].focus();
-    }
-  }, 50);
-});
-
-ports.setStorage.subscribe(function(state) {
-  console.log('setStorage', state);
-  localStorage.setItem('elmctron', JSON.stringify(state));
-});
-
-ports.startApp.subscribe((state) => {
-  const gameViewId = state.gameViewId;
-  ports.testEvent.send('Lel kek tops');
-});
-
+const n = require('./main-native');
+const ps = n.bindPorts(app.ports);
 </script>
 
 </html>

@@ -4,6 +4,10 @@ const electron = require('electron');
 const app = electron.app;  // Module to control application life.
 const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
 
+app.commandLine.appendSwitch('remote-debugging-port', '8642');
+app.commandLine.appendSwitch('ppapi-flash-path', './lib/PepperFlashPlayer.plugin');
+app.commandLine.appendSwitch('ppapi-flash-version', '21.0.0.197');
+
 require('electron-reload')(__dirname + '/app');
 
 // Keep a global reference of the window object, if you don't, the window will

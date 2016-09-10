@@ -2,6 +2,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 * {
@@ -17,6 +18,11 @@ webview {
   width: 800px;
   height: 480px;
   background: #fff;
+}
+
+section.main {
+  width: 800px;
+  overflow: hidden;
 }
 
 button {
